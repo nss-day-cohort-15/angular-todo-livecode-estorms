@@ -1,5 +1,6 @@
 "use strict";
-var app = angular.module("TodoApp", ["ngRoute"]);
+var app = angular.module("TodoApp", ["ngRoute"])
+.constant('FirebaseURL','https://todo-list-67408.firebaseio.com/');
 //module takes two arguments: name and array of dependencies
 //module has global scope
 //controllers (functions) have local/lexical scope
@@ -17,7 +18,11 @@ app.config(function($routeProvider){
         }).
         when("/items/new", {
             templateUrl: 'partials/item-form.html',
-            controller: "TodoCtrl"
+            controller: "ItemNewCtrl"
+        }).
+        when('/items/view/:itemId', {
+            templateUrl: "partials/item-details.html",
+            controller: "ItemViewCtrl"
         }).
         otherwise("/items/list");
 });
