@@ -2,12 +2,12 @@
 
 app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
     $scope.newTask = {
+        task: '',
         assignedTo: '',
         dependencies: '',
-        dueDat: '',
+        dueDate: '',
         isCompleted: false,
         location: '',
-        task: '',
         urgency: 'normal'
     };
 

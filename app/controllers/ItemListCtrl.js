@@ -8,4 +8,14 @@ app.controller("ItemListCtrl", function ($scope, ItemStorage, searchTermData) {
         $scope.items = itemCollectionArr;
 
     });
+
+    $scope.itemDelete = (itemId) => {
+        ItemStorage.deleteItem(itemId)
+        .then( (response) => {
+            ItemStorage.getItemList()
+            .then( (itemCollectionArr) => {
+            $scope.items = itemCollectionArr;
+             });
+        });
+    };
 });

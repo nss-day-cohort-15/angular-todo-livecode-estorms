@@ -33,5 +33,15 @@ let postNewItem = function (newItem){
             });
     });
 };
-    return {getItemList, postNewItem}; //have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browswerify?)
+
+let deleteItem = (itemId) => {
+    return $q( (resolve, reject) => {
+        $http.delete(`${FirebaseURL}/items/${itemId}.json`)
+        .success( (objFromFirebase) => {
+            resolve(objFromFirebase);
+        });
+    });
+};
+    return {getItemList, postNewItem, deleteItem}; //have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browswerify?)
+
 });
