@@ -6,9 +6,10 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="col-xs-1"><input type="checkbox" name=""/></div>
-                <div class="col-xs-7"><a ng-href="#/items/view/{{item.id}}">{{item.task}}</a></div>
+                <div class="col-xs-6"><a ng-href="#/items/view/{{item.id}}">{{item.task}}</a></div>
                 <div class="col-xs-2">{{item.dueDate}}</div>
                 <div class="col-xs-1">{{item.assignedTo}}</div>
+                <div class="col-xs-1" ng-click="itemEdit(item.id)">Edit</div>
                 <div class="col-xs-1"><button class="btn btn-danger" ng-click="itemDelete(item.id)">X</button></div>
               </div>
             </div>
