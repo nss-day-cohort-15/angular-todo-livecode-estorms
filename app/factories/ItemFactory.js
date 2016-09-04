@@ -54,7 +54,7 @@ let getSingleItem = (itemId) => {
 
 let editItem = (itemId, editedItem) => {
         return $q ( (resolve, reject) => {
-            $http.patch(`${FirebaseURL}/items/${itemId}.json`, editedItem)
+            $http.patch(`${FirebaseURL}/items/${itemId}.json`, JSON.stringify(editedItem))
             .success( (objFromFirebase) => {
                resolve(objFromFirebase);
         });
