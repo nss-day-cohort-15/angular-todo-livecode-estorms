@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("ItemListCtrl", function ($scope, ItemStorage, searchTermData) {
+app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchTermData) {
     $scope.searchText = searchTermData;
     ItemStorage.getItemList() //here we're calling to method ( getItemList() within the factory )
     .then((itemCollectionArr) => {
@@ -18,15 +18,14 @@ app.controller("ItemListCtrl", function ($scope, ItemStorage, searchTermData) {
              });
         });
     };
-    $scope.itemEdit = (itemId) => {
-        console.log(itemId);
-
+      $scope.itemEditView = (itemId) => {
+        $location.url(`/items/edit/${itemId}`);
+     };
         //first need to get the item view to display
         //then need to allow the user to edit the item
         //then need to capture the edited item
         //then need to send the edited item to FB
-    };
-});
+  });
 
 
 // function editMovie(movieData, movieID) {
