@@ -1,18 +1,15 @@
 "use strict";
 
-app.controller("ItemEditCtrl", function ($scope, $routeParams, $location, ItemStorage) {
-    ItemStorage.getSingleItem($routeParams.itemId)
-    .then((singleItem) => {
-        $scope.editTask = singleItem;
+app.controller("ItemEditCtrl", function($scope, ItemStorage, $location, $routeParams){
 
-    });
+// $scope.editedTask;
 
-$scope.editItem = (itemObj) => {
-    ItemStorage.editItem(itemObj.id, itemObj)
-    .then((response) =>{
-      console.log(response);
-      // $location.url('/items/list'); //pathing the edited item list back to the item list view
-    });
-  };
+$scope.runItemEdit = function (changedItem) {
+ let id = $routeParams.itemId;
+ console.log(id)
+ItemStorage.editItem(id, changedItem)
+.then( () =>
+    console.log(changedItem)
+    )};
 
 });

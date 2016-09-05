@@ -55,8 +55,9 @@ let getSingleItem = (itemId) => {
 let editItem = (itemId, editedItem) => {
         return $q ( (resolve, reject) => {
             $http.patch(`${FirebaseURL}/items/${itemId}.json`, JSON.stringify(editedItem))
-            .success( (objFromFirebase) => {
-               resolve(objFromFirebase);
+            .success( (result) => {
+               resolve(result);
+
         });
     });
 };
@@ -65,7 +66,7 @@ let editItem = (itemId, editedItem) => {
 
 
 
-    return {getItemList, postNewItem, deleteItem, editItem, getSingleItem}; //Have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browswerify?)
+    return {getItemList, postNewItem, deleteItem, editItem, getSingleItem}; //Have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browserify?)
 });
 
 /*Have to set up the route view for edit item; edit item ctrl needs to equate firebase ID'ed object with obj built in edit item html; function at end of edit item html needs to send new obj to Firebase through patch established in factory*/
