@@ -3,18 +3,18 @@
 app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
 
 let getItemList = () => {
-    let items = []; //not sure why we're using this empty array here, doesn't seem necessary from the way the promise is set up, which returns getItemLis and within get ItemList the itemObject = data needed within the purview of associated controller
-    return $q( (resolve, reject) => {    //instead of return new promise, use this syntax instead: $q = new Promise
+    let items = [];
+    return $q( (resolve, reject) => {    //Instead of returning a new promise via $ajax syntax, use this syntax instead: $q = new Promise
         $http.get(`${FirebaseURL}/items.json`) //$http = $.ajax({
         //     url: .....json
         // })
-        .success((itemObject) => { //receive an object from Firebase, object contains each item list inside
-            Object.keys(itemObject).forEach((key) => { //takes every key in an object passed in and makes an array of each key, creates an array of each FB item, because there's only one key in each object w/in firebase object, and that's the object ID( properties within)
-                itemObject[key].id = key; //setting property on each object called id
-                items.push(itemObject[key]); //pushing each each object into array
+        .success((itemObject) => { //Receive an object from Firebase, object contains each item list inside
+            Object.keys(itemObject).forEach((key) => { //Takes every key in an object passed in and makes an array of each key. So we create an array of each FB item--doable because there's only one key in each object w/in larger/single Firebase object, and that's the object ID (aka name)
+                itemObject[key].id = key; //Here we are setting a property on each object called id and making it synonymous with the object's name/sole key in larger Firebase object
+                items.push(itemObject[key]); //Here we are pushing each each object into array
             });
-           //equivalent to .done(itemObject = data returned)
-            resolve(items); //resolve(we officially have itemObject)
+
+            resolve(items); //Here we resolve: we officially have itemObject
         })
         .error((error) => {
             reject(error);
@@ -65,7 +65,7 @@ let editItem = (itemId, editedItem) => {
 
 
 
-    return {getItemList, postNewItem, deleteItem, editItem, getSingleItem}; //have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browswerify?)
+    return {getItemList, postNewItem, deleteItem, editItem, getSingleItem}; //Have to return getItemList method as an object to access it elsewhere ==> curly braces/object return are an indicator of modularity (like module.exports/require syntax in browswerify?)
 });
 
-/*Have to set up the route view for edit item, edit item ctrl needs to equate firebase ID'ed object with obj built in edit item html, function at end of edit item html needs to send new obj to Firebase through patch established in factory*/
+/*Have to set up the route view for edit item; edit item ctrl needs to equate firebase ID'ed object with obj built in edit item html; function at end of edit item html needs to send new obj to Firebase through patch established in factory*/

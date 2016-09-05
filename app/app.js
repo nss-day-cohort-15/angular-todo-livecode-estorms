@@ -1,26 +1,27 @@
 "use strict";
 var app = angular.module("TodoApp", ["ngRoute"])
 .constant('FirebaseURL','https://todo-list-67408.firebaseio.com/');
-//module takes two arguments: name and array of dependencies
-//module has global scope
-//controllers (functions) have local/lexical scope
+//Module takes two arguments: name and array of dependencies
+//Module has pseudo-global scope
+//Controllers (functions) have local/lexical scope
 
-// //app/module is an object upon which we are creating properties
-// data in nav controller communicates through scope to template/html/navbar
+// App/module is an object upon which we are creating properties
+// Data in a controller communicates through scope to template view
 
 //ROUTE = URL OF APPLICATION, NOT PATH TO FILES
 
 app.config(function($routeProvider){
     $routeProvider.
-        when("/items/list", {
-            templateUrl: 'partials/item-list.html',
-            controller: "ItemListCtrl"                    //not URL, Url
+        when("/items/list", { //Here we are creating a URL and equating it with its associated partial
+            templateUrl: 'partials/item-list.html', //Note that the grammar here specifies "Url", not all upper-case ("URL")
+            controller: "ItemListCtrl"
         }).
         when("/items/new", {
             templateUrl: 'partials/item-form.html',
             controller: "ItemNewCtrl"
         }).
         when('/items/view/:itemId', {
+            //The above "/: whatever" syntax is particular to URL's for which we'll be using $routeParams
             templateUrl: "partials/item-details.html",
             controller: "ItemViewCtrl"
         }).
@@ -31,4 +32,5 @@ app.config(function($routeProvider){
          }).
 
         otherwise("/items/list");
+        //The above is a safety URL that prevents users from accessing URL's that we don't want them to
 });
