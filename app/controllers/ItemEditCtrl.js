@@ -11,7 +11,7 @@ $scope.editItem = (itemObj) => {
     ItemStorage.editItem(itemObj.id, itemObj)
     .then((response) =>{
       console.log(response);
-      $location.url('/items/list');
+      // $location.url('/items/list'); //pathing the edited item list back to the item list view
     });
   };
 
