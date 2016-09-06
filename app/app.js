@@ -39,7 +39,7 @@ app.config(function($routeProvider){
         controller: 'ItemEditCtrl'
          }).
 
-        otherwise("/");
+        otherwise("items/item-list");
         //The above is a safety URL that prevents users from accessing URL's that we don't want them to
 });
 

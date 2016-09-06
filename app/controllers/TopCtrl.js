@@ -7,12 +7,11 @@ app.controller("TopCtrl", function ($scope, $location, $window, AuthFactory){
         if (user){
             $scope.isLoggedIn = true;
             console.log("Current user logged in?", user.uid)
-
+            $scope.$apply();
         } else {
             $scope.isLoggedIn = false;
             $window.location.href = '#/login'
         }
-        $scope.$apply();
     });
 
     $scope.logout = function (){

@@ -8,7 +8,8 @@ app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
         dueDate: '',
         isCompleted: false,
         location: '',
-        urgency: 'normal'
+        urgency: 'normal',
+        userId: ''
     };
 
 
