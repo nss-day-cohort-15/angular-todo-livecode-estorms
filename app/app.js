@@ -34,3 +34,14 @@ app.config(function($routeProvider){
         otherwise("/items/list");
         //The above is a safety URL that prevents users from accessing URL's that we don't want them to
 });
+
+//what you do right when the app runs
+app.run( ($location, FBCreds) => {
+        let creds = FBCreds;
+        let authConfig = {
+            apiKey: creds.key,
+            authDomain: creds.authDomain
+        };
+
+firebase.initializeApp(authConfig);
+});
