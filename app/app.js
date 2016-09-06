@@ -21,7 +21,7 @@ app.config(function($routeProvider){
             controller: "ItemNewCtrl"
         }).
         when('/items/view/:itemId', {
-            //The above "/: whatever" syntax is particular to URL's for which we'll be using $routeParams
+            //The above "/: whatever" syntax is particular to URL's for which we'll be using $routeParams ... $routeParams stands in for (:)?????
             templateUrl: "partials/item-details.html",
             controller: "ItemViewCtrl"
         }).

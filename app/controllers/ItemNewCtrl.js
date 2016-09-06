@@ -17,6 +17,8 @@ $scope.addNewItem = function () {
     .then(function(){
         $location.url('/item/list');
     });
+
+    //First we post a new item from the object we have just created, then it goes to the item-list view
 };
 
 });

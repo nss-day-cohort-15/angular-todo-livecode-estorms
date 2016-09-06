@@ -18,8 +18,5 @@ app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchT
              });
         });
     };
-     //  $scope.itemEditView = (itemId) => {
-     //    $location.url(`/items/edit/${itemId}`); //pathing the view to item edit. THAT'S what location does ... but why can't we do NG-VIEW here?
-     // };
   });
 
