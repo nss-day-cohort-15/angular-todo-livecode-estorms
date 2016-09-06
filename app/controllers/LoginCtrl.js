@@ -12,20 +12,26 @@ app.controller("LoginCtrl", function ($scope, $window, AuthFactory) {
             email: $scope.account.email,
             password: $scope.account.password
         })
-        .then((userData ) =>{
+        .then( (userData ) => {
         console.log("new User", userData);
         $scope.login();
         }, (error) => {
-            console.log(`Error creating user: ${error}`) ;
+            console.log(`Error creating user: ${error}`);
         });
+    }
 
-        $scope.login = () => {
-            console.log("you clicked login");
+
+    $scope.login = () => {
+    console.log("you clicked login");
             AuthFactory.loginUser($scope.account)
-            .then(()=> {
-                $window.location.href = "#/items/list"
-            })
-        }
-    };
+            .then( (data ) => {
+            if(data) {
+                $window.location.href= "#/items/list"
+            }
+            else {
+               $window.location.href = "#/login"
+            }
 
+})
+        }
 });

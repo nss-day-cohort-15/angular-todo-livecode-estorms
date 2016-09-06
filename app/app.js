@@ -12,6 +12,14 @@ var app = angular.module("TodoApp", ["ngRoute"])
 
 app.config(function($routeProvider){
     $routeProvider.
+      when ('/', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
+        }).
+      when ('/login', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
+      }).
         when("/items/list", { //Here we are creating a URL and equating it with its associated partial
             templateUrl: 'partials/item-list.html', //Note that the grammar here specifies "Url", not all upper-case ("URL")
             controller: "ItemListCtrl"
@@ -31,7 +39,7 @@ app.config(function($routeProvider){
         controller: 'ItemEditCtrl'
          }).
 
-        otherwise("/items/list");
+        otherwise("/");
         //The above is a safety URL that prevents users from accessing URL's that we don't want them to
 });
 
