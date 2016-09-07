@@ -2,8 +2,9 @@
 
 app.factory("AuthFactory", function ($window) {
 
+let userId;
 let createUser = function (userObj){
-   return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password) //here we create our own method on a built-in FB method (auth)
+   return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password) //here we create our own method on a built-in FB method (auth) //CAN ONLY PASS IN TWO ARGUMENTS HERE
    .catch(function (error) {
     let errorCode = error.code;
     let errorMessage = error.message;
@@ -13,7 +14,11 @@ let createUser = function (userObj){
 
     let loginUser = function (userObj) {
         return firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
-        // .then((userObj)=> console.log(userObj.uid))
+        .then((userObj)=> {
+          // console.log(userObj.uid)
+          userId = userObj.uid;
+          console.log(userId)
+      })
         .catch(function (error) {
             let errorCode = error.code;
             let errorMessage = error.message;

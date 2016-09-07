@@ -1,3 +1,4 @@
+
 "use strict";
 
 app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
@@ -16,7 +17,7 @@ app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
 $scope.addNewItem = function () {
     ItemStorage.postNewItem($scope.newTask)
     .then(function(){
-        $location.url('/item/list');
+        $location.url('/items/list');
     });
 
     //First we post a new item from the object we have just created, then it goes to the item-list view

@@ -1,11 +1,12 @@
 "use strict";
 
-app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchTermData) {
+app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchTermData, AuthFactory) {
     $scope.searchText = searchTermData;
     ItemStorage.getItemList() //Here we're calling to method ( getItemList() within the factory )
     .then((itemCollectionArr) => {
         console.log("item collection", itemCollectionArr);
         $scope.items = itemCollectionArr;
+        console.log()
 
     });
 
