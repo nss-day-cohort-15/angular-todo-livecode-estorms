@@ -1,55 +1,57 @@
 "use strict";
-var app = angular.module("TodoApp", ["ngRoute"])
-.constant('FirebaseURL','https://todo-list-67408.firebaseio.com/');
-//Module takes two arguments: name and array of dependencies
-//Module has pseudo-global scope
-//Controllers (functions) have local/lexical scope
 
-// App/module is an object upon which we are creating properties
-// Data in a controller communicates through scope to template view
+var app = angular.module('TodoApp', ['ngRoute'])
+            .constant('FirebaseURL', 'https://todolist-anglr.firebaseio.com');
 
-//ROUTE = URL OF APPLICATION, NOT PATH TO FILES
+
+let isAuth = (AuthFactory)=> new Promise((resolve, reject)=> {
+    if(AuthFactory.isAuthenticated()){
+      console.log('User logged in');
+      resolve();
+    } else {
+      console.log('User not logged in');
+      reject();
+    }
+  });
 
 app.config(function($routeProvider){
-    $routeProvider.
-      when ('/', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
-        }).
-      when ('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
-      }).
-        when("/items/list", { //Here we are creating a URL and equating it with its associated partial
-            templateUrl: 'partials/item-list.html', //Note that the grammar here specifies "Url", not all upper-case ("URL")
-            controller: "ItemListCtrl"
-        }).
-        when("/items/new", {
-            templateUrl: 'partials/item-form.html',
-            controller: "ItemNewCtrl"
-        }).
-        when('/items/view/:itemId', {
-            //The above "/: whatever" syntax is particular to URL's for which we'll be using $routeParams ... $routeParams stands in for (:)?????
-            templateUrl: "partials/item-details.html",
-            controller: "ItemViewCtrl"
-        }).
-
-        when('/items/edit/:itemId', {
-        templateUrl: 'partials/edit-task.html',
-        controller: 'ItemEditCtrl'
-         }).
-
-        otherwise("items/item-list");
-        //The above is a safety URL that prevents users from accessing URL's that we don't want them to
+  $routeProvider
+  .when('/', {
+    templateUrl: 'partials/login.html',
+    controller: 'LoginCtrl'
+  })
+  .when('/login', {
+    templateUrl: 'partials/login.html',
+    controller: 'LoginCtrl'
+  })
+  .when('/items/list', {
+    templateUrl: 'partials/item-list.html',
+    controller: 'ItemListCtrl',
+    resolve: {isAuth}
+  })
+  .when('/items/new',{
+    templateUrl: 'partials/item-form.html',
+    controller: 'ItemNewCtrl'
+  })
+  .when('/items/view/:itemId', {
+    templateUrl: 'partials/item-details.html',
+    controller: 'ItemViewCtrl',
+    resolve: {isAuth}
+  })
+  .when('/items/edit/:itemId', {
+    templateUrl: 'partials/item-edit.html',
+    controller: 'ItemEditCtrl',
+    resolve: {isAuth}
+  })
+  .otherwise('/');
 });
 
-//what you do right when the app runs
-app.run( ($location, FBCreds) => {
-        let creds = FBCreds;
-        let authConfig = {
-            apiKey: creds.key,
-            authDomain: creds.authDomain
-        };
+app.run(($location, FBCreds)=> {
+  let creds = FBCreds;
+  let authConfig = {
+    apiKey: creds.key,
+    authDomain: creds.authDomain
+  };
 
-firebase.initializeApp(authConfig);
+  firebase.initializeApp(authConfig);
 });

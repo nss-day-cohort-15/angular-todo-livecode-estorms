@@ -6,7 +6,7 @@ app.controller("ItemEditCtrl", function($scope, ItemStorage, $location, $routePa
 
 $scope.runItemEdit = function (changedItem) {
  let id = $routeParams.itemId;
- console.log(id)
+ console.log(id);
 ItemStorage.editItem(id, changedItem)
 .then( () =>
     console.log(changedItem)
@@ -17,7 +17,7 @@ ItemStorage.editItem(id, changedItem)
         $location.url('/item/list');
     })
 .then (function () {
-    console.log(id)
+    console.log(id);
 })
  //Second subsequent function post-editItem-promise: $location changes the url back kick to item/list view:
 

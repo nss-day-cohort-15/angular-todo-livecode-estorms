@@ -1,4 +1,3 @@
-
 "use strict";
 
 app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
@@ -10,7 +9,7 @@ app.controller("ItemNewCtrl", function ($scope, ItemStorage, $location){
         isCompleted: false,
         location: '',
         urgency: 'normal',
-        userId: ''
+
     };
 
 

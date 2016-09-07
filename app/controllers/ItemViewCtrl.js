@@ -9,9 +9,10 @@ app.controller("ItemViewCtrl", function ($scope, ItemStorage, $routeParams ){
     3. $routeParams, which allows us to access a specific URL through an ID it automatically creates upon a view with multiple associated items, e.g., our item list, which has multiple items for which we don't manually create an item ID; instead Angular creates it for us <== LIZ DOUBLE-CHECK THIS EXPLANATION */
     $scope.items = [];
 
+
     //Create empty array to hold objects we collect from the Item Storage factory
 
-    ItemStorage.getItemList() //Controller told to retrieve item list from factory
+    ItemStorage.getItemList($scope.$parent.getUser()) //Controller told to retrieve item list from factory
 
     .then( (itemCollectionArr) => { // Once we have the list (itemCollectionArr), we equate it with the $scope.items array
 

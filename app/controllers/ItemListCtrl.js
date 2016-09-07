@@ -1,8 +1,9 @@
 "use strict";
 
 app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchTermData, AuthFactory) {
+    let user = $scope.$parent.getUser();
     $scope.searchText = searchTermData;
-    ItemStorage.getItemList() //Here we're calling to method ( getItemList() within the factory )
+    ItemStorage.getItemList(user) //Here we're calling to method ( getItemList() within the factory )
     .then((itemCollectionArr) => {
         console.log("item collection", itemCollectionArr);
         $scope.items = itemCollectionArr;
@@ -20,4 +21,3 @@ app.controller("ItemListCtrl", function ($scope, $location, ItemStorage, searchT
         });
     };
   });
-

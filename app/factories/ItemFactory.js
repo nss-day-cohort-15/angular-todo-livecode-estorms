@@ -2,11 +2,11 @@
 
 app.factory("ItemStorage", ($q, $http, FirebaseURL, AuthFactory) => {
 
-let getItemList = () => {
-console.log( firebase.auth().currentUser); //FB has a built-in method to retrieve current user, i.e., "firebase.auth().currentUser"
+let getItemList = (user) => {
+// console.log(firebase.auth().currentUser.uid); //FB has a built-in method to retrieve current user, i.e., "firebase.auth().currentUser": DO THE FILTERING RIGHT HERE, AS THIS IS THE METHOD THAT RETURNS A PROMISE THAT THEN POPULATES LIST_ITEM_VIEW
     let items = [];
     return $q( (resolve, reject) => {    //Instead of returning a new promise via $ajax syntax, use this syntax instead: $q = new Promise
-        $http.get(`${FirebaseURL}/items.json`) //$http = $.ajax({
+        $http.get(`${FirebaseURL}/items.json?orderBy="uid"&equalTo="${user}"`) //$http = $.ajax({
         //     url: .....json
         // })
         .success((itemObject) => { //Receive an object from Firebase, object contains each item list inside

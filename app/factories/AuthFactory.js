@@ -8,27 +8,32 @@ let createUser = function (userObj){
    .catch(function (error) {
     let errorCode = error.code;
     let errorMessage = error.message;
-   })
+   });
    //returning a promise, but we don't have to write it, because they're already embedded as Firebase methods. We have universal access to firebase through link in index.html
-}
+};
 
     let loginUser = function (userObj) {
         return firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
         .then((userObj)=> {
-          // console.log(userObj.uid)
-          userId = userObj.uid;
-          console.log(userId)
+          // // console.log(userObj.uid)
+          // userId = userObj.uid;
+          // console.log(userId)
       })
         .catch(function (error) {
             let errorCode = error.code;
             let errorMessage = error.message;
-        })
+        });
     };
 
     let logoutUser = function () {
         return firebase.auth().signOut();
-    }
+    };
 
-    return {createUser, loginUser, logoutUser}
+
+  let isAuthenticated = ()=> {
+    return (firebase.auth().currentUser) ? true : false;
+  };
+
+    return {createUser, loginUser, logoutUser, isAuthenticated};
 
 });
